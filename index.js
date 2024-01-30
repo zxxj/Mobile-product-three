@@ -26,8 +26,8 @@ const render = () => {
 render();
 
 const control = new OrbitControls(camera, renderer.domElement);
-control.target.set(0, 0, 0);
-control.update();
+// control.target.set(0, 0, 0);
+// control.update();
 
 const axesHelper = new THREE.AxesHelper(100);
 scene.add(axesHelper);
