@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { mesh } from './model.js';
+import { resize } from './resize.js';
 
 const scene = new THREE.Scene();
 
@@ -26,11 +27,11 @@ const render = () => {
 render();
 
 const control = new OrbitControls(camera, renderer.domElement);
-// control.target.set(0, 0, 0);
-// control.update();
 
 const axesHelper = new THREE.AxesHelper(100);
 scene.add(axesHelper);
 
 document.body.appendChild(renderer.domElement);
-console.log(THREE);
+
+resize();
+export { camera, renderer };
