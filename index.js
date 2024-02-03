@@ -24,12 +24,12 @@ const ambientLgiht = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambientLgiht);
 
 // 平行光1
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(400, 200, 300);
 scene.add(directionalLight);
 
 // 平行光2
-const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
+const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight2.position.set(-400, -200, -300);
 scene.add(directionalLight2);
 

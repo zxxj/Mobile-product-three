@@ -5,6 +5,17 @@ import { scene } from './index.js';
 // 纹理贴图加载器
 const textureLoader = new THREE.TextureLoader();
 
+// 环境贴图加载器
+const cubeLoader = new THREE.CubeTextureLoader().setPath('/public/cube/pisa/');
+const cubeTextureEnv = cubeLoader.load([
+  'px.png',
+  'nx.png',
+  'py.png',
+  'ny.png',
+  'pz.png',
+  'nz.png',
+]);
+
 // gltf加载器
 const loader = new GLTFLoader();
 
@@ -15,7 +26,7 @@ const loadGLTF = (gltfPath, gltfName) => {
     const mesh = gltf.scene.getObjectByName('手机');
 
     // 修改为pbr材质
-    mesh.material = new THREE.MeshPhysicalMaterial({
+    mesh.material = new THREE.MeshStandardMaterial({
       metalness: 1.0, // 金属度
       roughness: 1.0, // 粗糙度
       map: textureLoader.load('/public/basecolor.png'), // 颜色贴图
@@ -24,6 +35,8 @@ const loadGLTF = (gltfPath, gltfName) => {
       normalMap: textureLoader.load('/public/normal.png'), // 法线贴图
       alphaMap: textureLoader.load('/public/opacity.png'), // alpha贴图
       transparent: true, // 如果使用了aplhaMap,要开启透明计算
+      envMap: cubeTextureEnv, // 设置PBR材质环境贴图,为了渲染效果更好
+      envMapIntensity: 0.9, // 设置环境贴图对模型表面影响程度
     });
 
     // 设置问题贴图的朝向
