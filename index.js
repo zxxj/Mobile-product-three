@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { resize } from './resize.js';
-import { loadGLTF } from './model.js';
+import { group, loadGLTF } from './model.js';
 
 // 场景
 const scene = new THREE.Scene();
@@ -20,7 +20,7 @@ camera.position.set(0, 0, 300);
 camera.lookAt(0, 0, 0);
 
 // 环境光
-const ambientLgiht = new THREE.AmbientLight(0xffffff, 1);
+const ambientLgiht = new THREE.AmbientLight(0xffffff, 5);
 scene.add(ambientLgiht);
 
 // 平行光1
@@ -40,6 +40,7 @@ renderer.setPixelRatio(window.devicePixelRatio); // 设置设备像素比,防止
 
 // 渲染动画帧
 const render = () => {
+  group.rotateY(0.01); // 设置手机模型的旋转
   requestAnimationFrame(render);
   renderer.render(scene, camera);
 };

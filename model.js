@@ -19,6 +19,9 @@ const cubeTextureEnv = cubeLoader.load([
 // gltf加载器
 const loader = new GLTFLoader();
 
+// 组
+const group = new THREE.Group();
+
 // 加载gltf方法
 const loadGLTF = (gltfPath, gltfName) => {
   loader.load(gltfPath + gltfName, (gltf) => {
@@ -46,9 +49,11 @@ const loadGLTF = (gltfPath, gltfName) => {
     mesh.material.roughnessMap.flipY = false;
     mesh.material.alphaMap.flipY = false;
 
+    group.add(gltf.scene);
+
     // 将模型添加到场景中
-    scene.add(gltf.scene);
+    scene.add(group);
   });
 };
 
-export { loadGLTF };
+export { loadGLTF, group };
