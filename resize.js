@@ -1,4 +1,4 @@
-import { camera, renderer } from './index.js';
+import { camera, renderer } from './rendererCamera.js';
 
 export const resize = () => {
   window.onresize = () => {
