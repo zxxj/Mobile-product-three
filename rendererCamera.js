@@ -33,5 +33,17 @@ resize();
 
 // 轨道控制器
 const control = new OrbitControls(camera, renderer.domElement);
+control.minDistance = 250; // 相机距离观察目标点极小距离——模型最大状态
+control.maxDistance = 500; // 相机距离观察目标点极大距离——模型最小状态
+// 左右旋转范围-100~100度
+control.minAzimuthAngle = -Math.PI * (100 / 180);
+control.maxAzimuthAngle = Math.PI * (100 / 180);
+// 上下旋转范围0~120度
+control.minPolarAngle = 0;
+control.maxPolarAngle = Math.PI * (120 / 180);
+
+control.enablePan = false; // 禁止右键拖拽
+// control.enableZoom = false; // 禁止滚轮缩放
+// control.enableRotate = false; // 禁止鼠标拖动
 
 export { renderer, camera };
