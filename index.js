@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 import { model } from './model.js';
+import { bottomCircleLine } from './bottomCircleLine.js';
 
 // 场景
 const scene = new THREE.Scene();
 scene.add(model);
+scene.add(bottomCircleLine);
 
 // 环境光
 const ambientLgiht = new THREE.AmbientLight(0xffffff, 5);

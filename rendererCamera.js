@@ -20,7 +20,6 @@ renderer.setPixelRatio(window.devicePixelRatio); // 设置设备像素比,防止
 
 // 渲染动画帧
 const render = () => {
-  // group.rotateY(0.005); // 设置手机模型的旋转
   requestAnimationFrame(render);
   renderer.render(scene, camera);
 };

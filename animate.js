@@ -1,6 +1,7 @@
 import { scene } from './index.js'; // Three.js三维场景
 import { renderer, camera } from './rendererCamera.js'; //渲染器对象和相机对象
 import { model } from './model.js'; // 手机模型
+
 // 渲染循环
 function render() {
   model.rotateY(0.005); //手机绕y轴旋转
