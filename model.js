@@ -40,6 +40,11 @@ loader.load('/public/手机.glb', (gltf) => {
   const sprite = createSpriteTag(rearCamera);
   model.add(sprite);
 
+  console.log(mesh.renderOrder, sprite.renderOrder); // 0, 0
+  // 通过设置renderOrder来解决半透明叠加问题(会发现光点有些角度是会显示黑色)
+  mesh.renderOrder = 0; // 手机模型先渲染
+  sprite.renderOrder = 1; // 光点后渲染
+
   handlePhoneMesh = mesh;
   // 修改为pbr材质
   mesh.material = new THREE.MeshStandardMaterial({
