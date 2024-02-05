@@ -24,8 +24,13 @@ const loader = new GLTFLoader();
 // 组
 const model = new THREE.Group();
 
+// 时间类
+const clock = new THREE.Clock();
+
 // 加载gltf方法
 loader.load('/public/手机.gltf', (gltf) => {
+  model.add(gltf.scene);
+
   // 找到name为手机的节点
   const mesh = gltf.scene.getObjectByName('手机');
 
@@ -51,7 +56,38 @@ loader.load('/public/手机.gltf', (gltf) => {
   mesh.material.roughnessMap.flipY = false;
   mesh.material.alphaMap.flipY = false;
 
-  model.add(gltf.scene);
+  // 设置纹理贴图自动切换
+  let T = 0; // 用于表示完成一轮贴图切换的所处时间
+  let spT = 2; // 纹理贴图切换时间(秒)
+  const blackMap = textureLoader.load('./public/幻夜黑.png');
+  const purpleMap = textureLoader.load('./public/极光紫.png');
+  const blueMap = textureLoader.load('./public/极光蓝.png');
+  const redMap = textureLoader.load('./public/珊瑚红.png');
+  blackMap.flipY = false;
+  purpleMap.flipY = false;
+  blueMap.flipY = false;
+  redMap.flipY = false;
+
+  const changeMaterialMap = () => {
+    // 每隔spT毫秒就切换一次贴图
+    if (T < spT) {
+      mesh.material.map = blackMap;
+    } else if (T < 2 * spT) {
+      mesh.material.map = purpleMap;
+    } else if (T < 3 * spT) {
+      mesh.material.map = blueMap;
+    } else if (T < 4 * spT) {
+      mesh.material.map = redMap;
+    } else {
+      T = 0;
+    }
+
+    let t = clock.getDelta();
+    T += t;
+    requestAnimationFrame(changeMaterialMap);
+  };
+
+  changeMaterialMap();
 });
 
 export { model, handlePhoneMesh };
