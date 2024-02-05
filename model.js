@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from './examples/jsm/loaders/GLTFLoader.js';
+import { createSpriteTag } from './createSpriteTag.js';
 
 // 纹理贴图加载器
 const textureLoader = new THREE.TextureLoader();
@@ -28,11 +29,16 @@ const model = new THREE.Group();
 const clock = new THREE.Clock();
 
 // 加载gltf方法
-loader.load('/public/手机.gltf', (gltf) => {
+loader.load('/public/手机.glb', (gltf) => {
   model.add(gltf.scene);
 
   // 找到name为手机的节点
   const mesh = gltf.scene.getObjectByName('手机');
+
+  // 找到模型中的后置摄像头
+  const rearCamera = gltf.scene.getObjectByName('后置摄像头位置');
+  const sprite = createSpriteTag(rearCamera);
+  model.add(sprite);
 
   handlePhoneMesh = mesh;
   // 修改为pbr材质
@@ -87,7 +93,7 @@ loader.load('/public/手机.gltf', (gltf) => {
     requestAnimationFrame(changeMaterialMap);
   };
 
-  changeMaterialMap();
+  // changeMaterialMap();
 });
 
 export { model, handlePhoneMesh };
