@@ -13,7 +13,6 @@ export const createSpriteTag = (obj) => {
   });
 
   const sprite = new THREE.Sprite(spriteMaterial);
-  sprite.scale.set(6, 6, 1); // 大小设置
   sprite.position.copy(rearCameraModelposition);
   sprite.position.x -= 8;
   sprite.position.z -= 2;

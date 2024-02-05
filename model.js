@@ -38,6 +38,7 @@ loader.load('/public/手机.glb', (gltf) => {
   // 找到模型中的后置摄像头
   const rearCamera = gltf.scene.getObjectByName('后置摄像头位置');
   const sprite = createSpriteTag(rearCamera);
+  sprite.scale.set(6, 6, 1); // 大小设置
   model.add(sprite);
 
   console.log(mesh.renderOrder, sprite.renderOrder); // 0, 0
@@ -99,6 +100,23 @@ loader.load('/public/手机.glb', (gltf) => {
   };
 
   // changeMaterialMap();
+
+  // 设置光点波动效果
+  let time = 0.0;
+  const spriteWave = () => {
+    time += 0.01;
+    if (time < 0.5) {
+      sprite.scale.x = 6 * (1 + time);
+      sprite.scale.y = 6 * (1 + time);
+    } else if (time >= 0.5 && time < 1.0) {
+      sprite.scale.x = 6 * (2 - time);
+      sprite.scale.y = 6 * (2 - time);
+    } else {
+      time = 0.0;
+    }
+    requestAnimationFrame(spriteWave);
+  };
+  spriteWave();
 });
 
 export { model, handlePhoneMesh };
