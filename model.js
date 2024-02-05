@@ -4,6 +4,9 @@ import { GLTFLoader } from './examples/jsm/loaders/GLTFLoader.js';
 // 纹理贴图加载器
 const textureLoader = new THREE.TextureLoader();
 
+// 指向手机网格模型,用于修改纹理贴图
+let handlePhoneMesh = null;
+
 // 环境贴图加载器
 const cubeLoader = new THREE.CubeTextureLoader().setPath('/public/cube/pisa/');
 const cubeTextureEnv = cubeLoader.load([
@@ -26,6 +29,7 @@ loader.load('/public/手机.gltf', (gltf) => {
   // 找到name为手机的节点
   const mesh = gltf.scene.getObjectByName('手机');
 
+  handlePhoneMesh = mesh;
   // 修改为pbr材质
   mesh.material = new THREE.MeshStandardMaterial({
     metalness: 1.0, // 金属度
@@ -50,4 +54,4 @@ loader.load('/public/手机.gltf', (gltf) => {
   model.add(gltf.scene);
 });
 
-export { model };
+export { model, handlePhoneMesh };

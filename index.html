@@ -6,10 +6,27 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- 控制手机模型的旋转状态 -->
     <div id="handleRotate">
-      <img id="rotateImg" src="./public/停止旋转.png" />
+      <img id="rotateImg" src="./assets/停止旋转.png" />
       <div id="rotateText">停止旋转</div>
     </div>
+
+    <!-- 切换手机模型贴图 -->
+    <ul id="handleMaterial">
+      <li id="black">
+        <img src="./assets/幻夜黑.png" alt="" />
+      </li>
+      <li id="purple">
+        <img src="./assets/极光紫.png" alt="" />
+      </li>
+      <li id="blue">
+        <img src="./assets/极光蓝.png" alt="" />
+      </li>
+      <li id="red">
+        <img src="./assets/珊瑚红.png" alt="" />
+      </li>
+    </ul>
 
     <script type="importmap">
       {
@@ -20,14 +37,58 @@
     </script>
 
     <script type="module">
+      import * as THREE from 'three';
       import { renderer } from './animate.js';
+      import { handlePhoneMesh } from './model.js';
       // dom
       document.body.appendChild(renderer.domElement);
+
+      // 点击切换手机模型材质
+      // 1.获取dom
+      const black = document.querySelector('#black');
+      const purple = document.querySelector('#purple');
+      const blue = document.querySelector('#blue');
+      const red = document.querySelector('#red');
+
+      // 2.加载纹理贴图
+      const loader = new THREE.TextureLoader();
+      const blackMap = loader.load('./public/幻夜黑.png');
+      const purpleMap = loader.load('./public/极光紫.png');
+      const blueMap = loader.load('./public/极光蓝.png');
+      const redMap = loader.load('./public/珊瑚红.png');
+      blackMap.flipY = false;
+      purpleMap.flipY = false;
+      blueMap.flipY = false;
+      redMap.flipY = false;
+
+      // 3.点击切换纹理贴图
+      black.onclick = () => {
+        handlePhoneMesh.material.map = blackMap;
+      };
+
+      purple.onclick = () => {
+        handlePhoneMesh.material.map = purpleMap;
+      };
+
+      blue.onclick = () => {
+        handlePhoneMesh.material.map = blueMap;
+      };
+
+      red.onclick = () => {
+        handlePhoneMesh.material.map = redMap;
+      };
     </script>
   </body>
 
   <style>
     * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul,
+    li {
       margin: 0;
       padding: 0;
     }
@@ -51,6 +112,23 @@
       width: 30px;
       vertical-align: middle;
       margin-right: 10px;
+    }
+
+    #handleMaterial {
+      position: absolute;
+      color: #fff;
+      top: 40%;
+      right: 0;
+      margin-right: 410px;
+    }
+
+    #handleMaterial > li {
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    #handleMaterial > li > img {
+      width: 50px;
     }
   </style>
 </html>

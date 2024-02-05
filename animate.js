@@ -15,8 +15,8 @@ handleRotate.addEventListener('click', () => {
     ? (rotateText.innerHTML = '停止旋转')
     : (rotateText.innerHTML = '开始旋转');
   isRotate === true
-    ? (rotateImg.src = './public/停止旋转.png')
-    : (rotateImg.src = './public/旋转.png');
+    ? (rotateImg.src = './assets/停止旋转.png')
+    : (rotateImg.src = './assets/旋转.png');
 });
 
 // 渲染循环
