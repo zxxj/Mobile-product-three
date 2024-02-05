@@ -47,7 +47,7 @@ bottomCircleLine.position.y = -82;
 // 字体部分
 
 // 加载字体
-fontLoader.load('./examples/fonts/optimer_regular.typeface.json', (font) => {
+fontLoader.load('./examples/fonts/gentilis_bold.typeface.json', (font) => {
   // 材质
   const material = new THREE.MeshLambertMaterial({
     color: 0xffffff, // 字体颜色
@@ -63,6 +63,7 @@ fontLoader.load('./examples/fonts/optimer_regular.typeface.json', (font) => {
   const textMesh = new THREE.Mesh(geometry, material);
   textMesh.position.z = R;
   textMesh.position.x = -26;
+
   bottomCircleLine.add(textMesh);
 });
 

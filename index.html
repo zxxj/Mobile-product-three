@@ -6,6 +6,11 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="handleRotate">
+      <img id="rotateImg" src="./public/停止旋转.png" />
+      <div id="rotateText">停止旋转</div>
+    </div>
+
     <script type="importmap">
       {
         "imports": {
@@ -25,6 +30,27 @@
     * {
       margin: 0;
       padding: 0;
+    }
+
+    body {
+      position: relative;
+    }
+
+    #handleRotate {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      color: #fff;
+      top: 30%;
+      right: 0;
+      margin-right: 400px;
+      cursor: pointer;
+    }
+
+    #rotateImg {
+      width: 30px;
+      vertical-align: middle;
+      margin-right: 10px;
     }
   </style>
 </html>
