@@ -10,6 +10,9 @@ const textureLoader = new THREE.TextureLoader();
 // 指向手机网格模型,用于修改纹理贴图
 let handlePhoneMesh = null;
 
+// 指向手机摄像头信息元素, 用于射线拾取
+let spriteMesh = null;
+
 // 环境贴图加载器
 const cubeLoader = new THREE.CubeTextureLoader().setPath('/public/cube/pisa/');
 const cubeTextureEnv = cubeLoader.load([
@@ -39,23 +42,23 @@ loader.load('/public/手机.glb', (gltf) => {
 
   // 找到模型中的后置摄像头
   const rearCamera = gltf.scene.getObjectByName('后置摄像头位置');
-  const sprite = createSpriteTag(rearCamera);
-  sprite.scale.set(6, 6, 1); // 大小设置
-  model.add(sprite);
+  spriteMesh = createSpriteTag(rearCamera);
+  spriteMesh.scale.set(6, 6, 1); // 大小设置
+  model.add(spriteMesh);
 
-  console.log(mesh.renderOrder, sprite.renderOrder); // 0, 0
+  console.log(mesh.renderOrder, spriteMesh.renderOrder); // 0, 0
   // 通过设置renderOrder来解决半透明叠加问题(会发现光点有些角度是会显示黑色)
   mesh.renderOrder = 0; // 手机模型先渲染
-  sprite.renderOrder = 1; // 光点后渲染
+  spriteMesh.renderOrder = 1; // 光点后渲染
 
   // 显示相机信息
   const cameraMessageEl = document.querySelector('#cameraMessage');
   // 解决信息元素位置问题, 先隐藏,等待模型加载完成后再显示
-  cameraMessageEl.style.visibility = 'visible';
+  // cameraMessageEl.style.visibility = 'visible';
   // 将HTML元素包装为CSS2模型对象
   const cameraMessage = new CSS3DObject(cameraMessageEl);
   // 将HTML元素设置在threejs中世界坐标的位置
-  cameraMessage.position.copy(sprite.position);
+  cameraMessage.position.copy(spriteMesh.position);
   //根据相机渲染范围缩放到合适尺寸
   cameraMessage.scale.set(0.22, 0.22, 1.0);
   //默认尺寸504 缩放0.22倍  平移504*0.22的一半
@@ -125,11 +128,11 @@ loader.load('/public/手机.glb', (gltf) => {
   const spriteWave = () => {
     time += 0.01;
     if (time < 0.5) {
-      sprite.scale.x = 6 * (1 + time);
-      sprite.scale.y = 6 * (1 + time);
+      spriteMesh.scale.x = 6 * (1 + time);
+      spriteMesh.scale.y = 6 * (1 + time);
     } else if (time >= 0.5 && time < 1.0) {
-      sprite.scale.x = 6 * (2 - time);
-      sprite.scale.y = 6 * (2 - time);
+      spriteMesh.scale.x = 6 * (2 - time);
+      spriteMesh.scale.y = 6 * (2 - time);
     } else {
       time = 0.0;
     }
@@ -138,4 +141,4 @@ loader.load('/public/手机.glb', (gltf) => {
   spriteWave();
 });
 
-export { model, handlePhoneMesh };
+export { model, handlePhoneMesh, spriteMesh };

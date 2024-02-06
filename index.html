@@ -71,6 +71,8 @@
       import * as THREE from 'three';
       import { renderer } from './animate.js';
       import { handlePhoneMesh } from './model.js';
+      import { choose } from './choose.js';
+
       // dom
       document.body.appendChild(renderer.domElement);
 
@@ -107,6 +109,12 @@
 
       red.onclick = () => {
         handlePhoneMesh.material.map = redMap;
+      };
+
+      // 关闭摄像头信息标签
+      const closeCameraMessage = document.querySelector('#cameraMessage');
+      closeCameraMessage.onclick = () => {
+        closeCameraMessage.style.visibility = 'hidden';
       };
     </script>
   </body>
