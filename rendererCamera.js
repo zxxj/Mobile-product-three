@@ -3,6 +3,7 @@ import { OrbitControls } from './examples/jsm/controls/OrbitControls.js';
 import { resize } from './resize.js';
 import { scene } from './index.js';
 import { CSS2DRenderer } from './examples/jsm/renderers/CSS2DRenderer.js';
+import { CSS3DRenderer } from './examples/jsm/renderers/CSS3DRenderer.js';
 
 // 相机
 const camera = new THREE.PerspectiveCamera(
@@ -15,12 +16,12 @@ camera.position.set(0, 0, 300);
 camera.lookAt(0, 0, 0);
 
 // css2渲染器
-const labelRenderer = new CSS2DRenderer();
+const labelRenderer = new CSS3DRenderer();
 labelRenderer.setSize(window.innerWidth, window.innerHeight);
 labelRenderer.domElement.style.position = 'absolute';
 // 相对元素原位置偏移量
 labelRenderer.domElement.style.top = '0px';
-labelRenderer.domElement.style.left = '260px';
+labelRenderer.domElement.style.left = '0px';
 // 避免模型元素遮挡鼠标选择场景中的模型
 labelRenderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild(labelRenderer.domElement);

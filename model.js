@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from './examples/jsm/loaders/GLTFLoader.js';
 import { createSpriteTag } from './createSpriteTag.js';
 import { CSS2DObject } from './examples/jsm/renderers/CSS2DRenderer.js';
+import { CSS3DObject } from './examples/jsm/renderers/CSS3DRenderer.js';
 
 // 纹理贴图加载器
 const textureLoader = new THREE.TextureLoader();
@@ -52,9 +53,14 @@ loader.load('/public/手机.glb', (gltf) => {
   // 解决信息元素位置问题, 先隐藏,等待模型加载完成后再显示
   cameraMessageEl.style.visibility = 'visible';
   // 将HTML元素包装为CSS2模型对象
-  const cameraMessage = new CSS2DObject(cameraMessageEl);
+  const cameraMessage = new CSS3DObject(cameraMessageEl);
   // 将HTML元素设置在threejs中世界坐标的位置
   cameraMessage.position.copy(sprite.position);
+  //根据相机渲染范围缩放到合适尺寸
+  cameraMessage.scale.set(0.22, 0.22, 1.0);
+  //默认尺寸504 缩放0.22倍  平移504*0.22的一半
+  cameraMessage.position.x += (-504 * 0.22) / 2;
+  cameraMessage.rotateY(Math.PI);
   // 添加到模型中
   model.add(cameraMessage);
 
