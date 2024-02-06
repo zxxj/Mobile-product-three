@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from './examples/jsm/loaders/GLTFLoader.js';
 import { createSpriteTag } from './createSpriteTag.js';
+import { CSS2DObject } from './examples/jsm/renderers/CSS2DRenderer.js';
 
 // 纹理贴图加载器
 const textureLoader = new THREE.TextureLoader();
@@ -46,7 +47,19 @@ loader.load('/public/手机.glb', (gltf) => {
   mesh.renderOrder = 0; // 手机模型先渲染
   sprite.renderOrder = 1; // 光点后渲染
 
+  // 显示相机信息
+  const cameraMessageEl = document.querySelector('#cameraMessage');
+  // 解决信息元素位置问题, 先隐藏,等待模型加载完成后再显示
+  cameraMessageEl.style.visibility = 'visible';
+  // 将HTML元素包装为CSS2模型对象
+  const cameraMessage = new CSS2DObject(cameraMessageEl);
+  // 将HTML元素设置在threejs中世界坐标的位置
+  cameraMessage.position.copy(sprite.position);
+  // 添加到模型中
+  model.add(cameraMessage);
+
   handlePhoneMesh = mesh;
+
   // 修改为pbr材质
   mesh.material = new THREE.MeshStandardMaterial({
     metalness: 1.0, // 金属度
