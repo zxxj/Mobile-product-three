@@ -30,6 +30,7 @@ document.body.appendChild(labelRenderer.domElement);
 const renderer = new THREE.WebGLRenderer({ antialias: true }); // 开启抗锯齿
 renderer.setSize(window.innerWidth, window.innerHeight); // 设置画布尺寸
 renderer.setPixelRatio(window.devicePixelRatio); // 设置设备像素比,防止canvas画布输出模糊
+renderer.setClearColor('#dcc6fb');
 
 // 渲染动画帧
 const render = () => {

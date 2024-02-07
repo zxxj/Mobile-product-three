@@ -97,18 +97,22 @@
       // 3.点击切换纹理贴图
       black.onclick = () => {
         handlePhoneMesh.material.map = blackMap;
+        renderer.setClearColor('#8d8d8d');
       };
 
       purple.onclick = () => {
         handlePhoneMesh.material.map = purpleMap;
+        renderer.setClearColor('#dcc6fb');
       };
 
       blue.onclick = () => {
         handlePhoneMesh.material.map = blueMap;
+        renderer.setClearColor('#a7c9e5');
       };
 
       red.onclick = () => {
         handlePhoneMesh.material.map = redMap;
+        renderer.setClearColor('#d3736e');
       };
 
       // 关闭摄像头信息标签
